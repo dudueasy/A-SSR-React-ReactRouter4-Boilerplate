@@ -30,7 +30,7 @@ app.get("/api/news", (req, res) => {
 
     * 我们需要在客户端的 VDOM 中重新生成状态.
     * 通过模板中插入 script 的方式将状态传递到客户端
-    * ​在组件中的 ```constructor()``` 中 中生成 VDOM 上的状态, 将服务端渲染到真实 DOM 的组件和 VDOM 中的组件完全同步
+    * ​在组件中的 ```constructor()``` 中生成 VDOM 上的状态, 将服务端渲染到真实 DOM 的组件和 VDOM 中的组件完全同步
     
 ~~~
 res.render(
@@ -72,8 +72,8 @@ constructor(props) {
 
   * 利用 req.url 和 StaticRouter 实现动态响应以及组件传参
   * 服务端应用 ```<StaticRouter>```
-  * ```<StaticRouter>``` 可以同构 ```location``` 属性来触发对应的 ```<Router>```, 实现动态渲染组件. 
-  * ```<StaticRouter>``` 可以通过 ```context``` 属性传数据 给 <Router> 对应的组件, 组件通过 ```props.staticContext``` 访问到这个数据.
+  * ```<StaticRouter>``` 可以通过 ```location``` 属性来触发对应的 ```<Router>```, 实现动态渲染组件. 
+  * ```<StaticRouter>``` 可以通过 ```context``` 属性传数据给 ```<Router>``` 对应的组件, 组件通过 ```props.staticContext``` 访问到这个数据.
 
 ~~~ 
 // server entry
