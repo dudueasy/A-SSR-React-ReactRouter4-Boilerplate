@@ -18,7 +18,7 @@ npm run start-dev
 
 ## 流程概述
 * 服务端数据服务
-    * 服务端提供一个接口, 用于提供数据给服务器内部以及前端页面
+    * 服务端提供接口, 响应数据给服务端渲染的组件以及前端组件
 ~~~
 app.get("/api/news", (req, res) => {
   res.json(stateObj)
@@ -26,11 +26,11 @@ app.get("/api/news", (req, res) => {
 ~~~
 
 * ​初始数据的同步
-    * 服务端返回的页面 (服务端渲染后的页面) 中的组件是有状态的. 客户端收到数据时, 这些组件已经存在真实 DOM 中, 由于未在 VDOM 上生成 (mount), 所以客户端的VDOM中没有状态.  这导致组件无法和 react 交互.
+    * 服务端渲染的代码中, 我们给组件传递了props, 并且通过 props 设置了状态. 
+    * 在客户端渲染的代码中, 我们要使用服务器传递的数据来动态地设置组件状态.
 
-    * 我们需要在客户端的 VDOM 中重新生成状态.
-    * 通过模板中插入 script 的方式将状态传递到客户端
-    * ​在组件中的 ```constructor()``` 中 中生成 VDOM 状态, 将服务端渲染到真实 DOM 的组件和 VDOM 中的组件完全同步
+    * 这个示例将会使用模板中插入 script 的方式将数据传递到客户端
+    * ​在组件的 ```constructor()``` 中生成组件的状态.
     
 ~~~
 res.hydrate(
@@ -50,12 +50,10 @@ res.hydrate(
 constructor(props) {
     super(props);
     let initialData
-    // this.props is only available on server
-    if (this.props.initialData) {
-      initialData = this.props.initialData
+    if (props.initialData) {
+      initialData = props.initialData
     } 
-
-    // on client there is not a this.props.initialData
+    // on client we don't pass props to component, we take data from window object
     else {
       initialData = window.__initialData__
       delete window.__initialData__
@@ -65,14 +63,14 @@ constructor(props) {
   }
 ~~~
 
-* ​引入 React Router, 服务端动态响应组件和数据
+* ​引入 React Router, 实现服务端动态响应组件和数据
   * 让用户以任何路径开始请求服务端渲染页面的时候都能获得对应的组件和数据.
   * 在每个组件上都添加一个 API 用来获取所需的数据
 
   * 利用 req.url 和 StaticRouter 实现动态响应以及组件传参
   * 服务端应用 ```<StaticRouter>```
-  * ```<StaticRouter>``` 可以同构 ```location``` 属性来触发对应的 ```<Router>```, 实现动态渲染组件. 
-  * ```<StaticRouter>``` 可以通过 ```context``` 属性传数据 给 <Router> 对应的组件, 组件通过 ```props.staticContext``` 访问到这个数据.
+    * ```<StaticRouter>``` 可以通过 ```location``` 属性来触发相应 ```<Router>```, 实现动态渲染组件. 
+    * ```<StaticRouter>``` 可以通过 ```context``` 属性传数据给 ```<Router>``` 渲染的组件, 组件通过 ```props.staticContext``` 访问到```context```数据.
 
 ~~~ 
 // server entry
@@ -80,7 +78,7 @@ app.get("*", (req, res) => {
 
 ---伪代码开始---
 根据 req.url 判断请求的是哪个组件
-调用 对应组件上提供数据的 API 来获取数据initialData
+调用对应组件上的数据接口来获取初始数据initialData
 
 Promise.resolve(initialData)
 ---伪代码结束---
