@@ -33,7 +33,7 @@ app.get("/api/news", (req, res) => {
     * ​在组件的 ```constructor()``` 中生成组件的状态.
     
 ~~~
-res.hydrate(
+res.send(
 `
 ...
 <script>window.__initialData__ =${initialData }</script>
