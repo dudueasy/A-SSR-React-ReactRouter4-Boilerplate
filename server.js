@@ -118,7 +118,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_routes__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_serialize_javascript__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_serialize_javascript___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_serialize_javascript__);
-var _jsxFileName = "/Users/apolodu/Documents/My_projects/react_SSR_Demo/src/server/index.js",
+var _jsxFileName = "/Users/apolodu/Documents/My_projects/react_reactRouter4_SSR_boilerplate/src/server/index.js",
     _this = this;
 
 
@@ -134,7 +134,7 @@ if (process.env.NODE_ENV === 'development') {
   __webpack_require__(22).install();
 }
 
-var app = __WEBPACK_IMPORTED_MODULE_0_express___default.a();
+var app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
 
 app.use(__WEBPACK_IMPORTED_MODULE_0_express___default.a.static("public"));
 
@@ -164,13 +164,13 @@ app.get("*", function (req, res) {
   // user react-router matchPath to check if a route (config object) match current request.
   // user requestInitialData from current component to ge initial State data
   var currentRoute = __WEBPACK_IMPORTED_MODULE_6__shared_routes__["a" /* default */].find(function (route) {
-    return __WEBPACK_IMPORTED_MODULE_4_react_router__["matchPath"](req.url, route);
+    return Object(__WEBPACK_IMPORTED_MODULE_4_react_router__["matchPath"])(req.url, route);
   });
   var requestInitialData = currentRoute.component.requestInitialData && currentRoute.component.requestInitialData();
 
   Promise.resolve(requestInitialData).then(function (initialData) {
     var context = { initialData: initialData };
-    var markup = __WEBPACK_IMPORTED_MODULE_2_react_dom_server__["renderToString"](__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+    var markup = Object(__WEBPACK_IMPORTED_MODULE_2_react_dom_server__["renderToString"])(__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
       __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["StaticRouter"],
       { context: context, location: req.url, __source: {
           fileName: _jsxFileName,
@@ -187,7 +187,7 @@ app.get("*", function (req, res) {
       })
     ));
 
-    res.send("\n      <!DOCTYPE html>\n        <head>\n          <title>React & React Router4 SSR</title>\n          <link rel=\"stylesheet\" href=\"/css/main.css\">\n          <script src=\"/bundle.js\" defer></script>\n          <script>window.__initialData__ =" + __WEBPACK_IMPORTED_MODULE_7_serialize_javascript___default.a(initialData) + "</script>\n        </head>\n\n        <body>\n          <div id=\"root\">" + markup + "</div>\n        </body>\n      </html>\n  ");
+    res.send("\n      <!DOCTYPE html>\n        <head>\n          <title>React & React Router4 SSR</title>\n          <link rel=\"stylesheet\" href=\"/css/main.css\">\n          <script src=\"/bundle.js\" defer></script>\n          <script>window.__initialData__ =" + __WEBPACK_IMPORTED_MODULE_7_serialize_javascript___default()(initialData) + "</script>\n        </head>\n\n        <body>\n          <div id=\"root\">" + markup + "</div>\n        </body>\n      </html>\n  ");
   });
 });
 
@@ -226,7 +226,7 @@ module.exports = require("react-router");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__App_css__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__App_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__App_css__);
-var _jsxFileName = "/Users/apolodu/Documents/My_projects/react_SSR_Demo/src/shared/App.js",
+var _jsxFileName = "/Users/apolodu/Documents/My_projects/react_reactRouter4_SSR_boilerplate/src/shared/App.js",
     _this = this;
 
 
@@ -268,7 +268,7 @@ var App = function App() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NewsList__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
-var _jsxFileName = "/Users/apolodu/Documents/My_projects/react_SSR_Demo/src/shared/news/News.js";
+var _jsxFileName = "/Users/apolodu/Documents/My_projects/react_reactRouter4_SSR_boilerplate/src/shared/news/News.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -335,7 +335,7 @@ var News = function (_Component) {
   }], [{
     key: "requestInitialData",
     value: function requestInitialData() {
-      return __WEBPACK_IMPORTED_MODULE_2_axios___default.a('http://localhost:3000/api/news').then(function (result) {
+      return __WEBPACK_IMPORTED_MODULE_2_axios___default()('http://localhost:3000/api/news').then(function (result) {
         return result.data;
       });
     }
@@ -361,7 +361,7 @@ var News = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__w18_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__w18_png__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NewsList_css__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NewsList_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__NewsList_css__);
-var _jsxFileName = "/Users/apolodu/Documents/My_projects/react_SSR_Demo/src/shared/news/NewsList.js";
+var _jsxFileName = "/Users/apolodu/Documents/My_projects/react_reactRouter4_SSR_boilerplate/src/shared/news/NewsList.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -407,7 +407,7 @@ var NewsList = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var news = __WEBPACK_IMPORTED_MODULE_2_lodash_orderBy___default.a(this.props.news, this.state.sortOrder, "desc");
+      var news = __WEBPACK_IMPORTED_MODULE_2_lodash_orderBy___default()(this.props.news, this.state.sortOrder, "desc");
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "div",
@@ -546,7 +546,7 @@ var NewsList = function (_Component) {
               },
               post.upvotes,
               " upvotes | ",
-              __WEBPACK_IMPORTED_MODULE_1_node_time_ago___default.a(post.date)
+              __WEBPACK_IMPORTED_MODULE_1_node_time_ago___default()(post.date)
             )
           );
         })
@@ -3119,7 +3119,7 @@ module.exports = require("axios");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__wizards_jpg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__wizards_jpg__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Home_css__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Home_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__Home_css__);
-var _jsxFileName = "/Users/apolodu/Documents/My_projects/react_SSR_Demo/src/shared/home/Home.js";
+var _jsxFileName = "/Users/apolodu/Documents/My_projects/react_reactRouter4_SSR_boilerplate/src/shared/home/Home.js";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 

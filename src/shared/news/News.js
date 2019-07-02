@@ -9,12 +9,14 @@ class News extends Component {
 
     super(props);
     let initialData
-    // props is only available on server
+    // props.staticContext  is only available on server
     // props.staticContext is exposed by <StaticRouter> 
     if (props.staticContext) {
       initialData = props.staticContext
     }
-    // on client component can't receive props that has initialData 
+
+    // on client component can't receive props that has initialData
+      // so we get initialData from the template that comes from server
     else {
       console.log(111)
       initialData = window.__initialData__
